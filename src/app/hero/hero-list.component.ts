@@ -8,7 +8,7 @@ import { Headers } from '@angular/http';
 export class HeroListComponent implements OnInit {
 
 	header : Headers;
-	results : string;
+	results : any;
 
 	constructor(private http: HttpClient) {}
 

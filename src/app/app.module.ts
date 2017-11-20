@@ -1,12 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
-
 
 import { AppComponent } from './app.component';
 
 import { HeroModule } from './hero/hero.module';
 import { AppRoutingModule } from './app-routing.module';
+
 
 
 @NgModule({
@@ -15,8 +16,9 @@ import { AppRoutingModule } from './app-routing.module';
   ],
   imports: [
     BrowserModule,
-    HttpClientModule,
+    HttpModule,
     HeroModule,
+    HttpClientModule,
     AppRoutingModule
   ],
   providers: [],
