@@ -7,11 +7,13 @@ import { HeroListComponent } from './hero-list.component';
 import { SignupComponent } from './signup.component';
 import { HeroLoginComponent } from './hero-login.component';
 
+import { AuthService } from '../service/auth.service';
+
 @NgModule({
 	declarations: [ HeroListComponent, SignupComponent, HeroLoginComponent ],
 	imports: [ CommonModule, FormsModule, ReactiveFormsModule ],
 	exports: [],
-	providers: []
+	providers: [ AuthService ]
 })
 export class HeroModule {
 

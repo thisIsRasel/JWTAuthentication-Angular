@@ -1,21 +1,32 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Http, Response } from '@angular/http';
+
+import { Router, ActivatedRoute } from '@angular/router';
+import { AuthService } from '../service/auth.service';
 
 @Component({
 	templateUrl:'./hero-login.component.html'
 })
-export class HeroLoginComponent {
+export class HeroLoginComponent implements OnInit {
 
 	loginForm: FormGroup;
+	returnUrl: string;
 
-	constructor(private _http: Http) {
+	constructor(
+		private authService: AuthService, 
+		private router: Router, 
+		private route: ActivatedRoute
+	) { }
+
+	ngOnInit() {
 
 		this.loginForm = new FormGroup({
 
 			'email': new FormControl('', Validators.required),
 			'password': new FormControl('', Validators.required)
 		});
+
+		this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
 	}
 
 	get email() { return this.loginForm.get('email'); }
@@ -26,15 +37,6 @@ export class HeroLoginComponent {
 
 		let credentials = JSON.stringify(this.loginForm.value);
 		
-		this._http.post('http://heroapp/api/login-hero', {params: credentials})
-			.subscribe((resp: Response) => {
-
-				let body = resp.json();
-
-				this._http.get('http://heroapp/api/authenticate-hero?token=' + (body.token)).subscribe((data)=>{
-
-					console.log(data);
-				});
-			});
+		this.authService.login(credentials, this.returnUrl);
 	}
 }
