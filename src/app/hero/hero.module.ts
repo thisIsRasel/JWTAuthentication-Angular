@@ -6,16 +6,18 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared.module';
 
 import { HeroListComponent } from './hero-list.component';
+import { SendMessageComponent } from './send-message.component';
 import { SignupComponent } from './signup.component';
 import { HeroLoginComponent } from './hero-login.component';
 
 import { AuthService } from '../service/auth.service';
+import { HeroService } from '../service/hero.service';
 
 @NgModule({
-	declarations: [ HeroListComponent, SignupComponent, HeroLoginComponent ],
+	declarations: [ HeroListComponent, SignupComponent, HeroLoginComponent, SendMessageComponent ],
 	imports: [ CommonModule, FormsModule, ReactiveFormsModule, SharedModule ],
 	exports: [],
-	providers: [ AuthService ]
+	providers: [ AuthService, HeroService ]
 })
 export class HeroModule {
 
