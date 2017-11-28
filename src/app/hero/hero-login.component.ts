@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { Router, ActivatedRoute } from '@angular/router';
@@ -26,7 +26,7 @@ export class HeroLoginComponent implements OnInit {
 			'password': new FormControl('', Validators.required)
 		});
 
-		this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+		this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || 'hero-list';
 	}
 
 	get email() { return this.loginForm.get('email'); }
@@ -35,8 +35,14 @@ export class HeroLoginComponent implements OnInit {
 
 	loginHero() {
 
-		let credentials = JSON.stringify(this.loginForm.value);
-		
-		this.authService.login(credentials, this.returnUrl);
+		if(! this.loginForm.invalid) {
+
+			let credentials = JSON.stringify(this.loginForm.value);
+			
+			this.authService.login(credentials, this.returnUrl);
+		} else {
+
+			console.log("Invalid form");
+		}
 	}
 }

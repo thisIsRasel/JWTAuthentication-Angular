@@ -4,8 +4,9 @@
             <div class="panel-heading">
                 <h3 class="panel-title">Login</h3>
             </div>
+
             <div class="panel-body">
-                <form class="form-horizontal" (ngSubmit)="loginHero()" [formGroup]="loginForm">
+                <form class="form-horizontal" (ngSubmit)="loginHero()" [formGroup]="loginForm" novalidate>
 
                     <fieldset>
                         <div class="form-group">
@@ -25,7 +26,7 @@
                         </div>
 
                         <!-- Change this to a button or input when using this as a form -->
-                        <input type="submit" [disabled]="loginForm.invalid" class="btn btn-lg btn-success btn-block" value="Login">
+                        <input type="submit" class="btn btn-lg btn-success btn-block" value="Login">
                     </fieldset>
                 </form>
             </div>

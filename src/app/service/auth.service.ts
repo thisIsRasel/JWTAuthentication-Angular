@@ -59,7 +59,12 @@ export class AuthService {
 
 		sessionStorage.clear();
 
-		return this.router.navigate(['/']);
+		if(!sessionStorage.getItem('_token') || !sessionStorage.getItem('_current_user')) {
+
+			return true;
+		}
+
+		return false;
 	}
 
 	isLoggedIn() { 

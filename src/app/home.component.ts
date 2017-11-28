@@ -4,6 +4,8 @@ import { Component } from '@angular/core';
 	
 	template: `
 	<p class="text-center">This is a hero app. Here you will find all the hero list and their super power.</p>
+
+	<log-buttons></log-buttons>
 	`
 })
 export class HomeComponent {

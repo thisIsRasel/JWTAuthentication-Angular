@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home.component';
 
 import { HeroModule } from './hero/hero.module';
+import { SharedModule } from './shared.module';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AuthGuard } from './guard/auth.guard';
@@ -20,10 +21,11 @@ import { AuthGuard } from './guard/auth.guard';
     BrowserModule,
     HttpModule,
     HeroModule,
+    SharedModule,
     HttpClientModule,
     AppRoutingModule
   ],
   providers: [ AuthGuard ],
-  bootstrap: [AppComponent]
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { }
