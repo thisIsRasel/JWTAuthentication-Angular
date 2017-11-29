@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { Response } from '@angular/http';
 
 import { Router } from '@angular/router';
 
@@ -63,7 +65,7 @@ export class SendMessageComponent implements OnInit{
 	success: boolean;
 	showMessage: boolean = false;;
 
-	constructor(private heroService: HeroService, private router: Router) { }
+	constructor(private heroService: HeroService, private router: Router, private _http: HttpClient) { }
 
 	ngOnInit() {
 
@@ -86,12 +88,19 @@ export class SendMessageComponent implements OnInit{
 	send() {
 
 		let data: any;
-		this.showMessage = true;
-
+		let result: any;
 		if(!this.messageForm.invalid) {
 
-			this.heroService.sendMessage(this.token, JSON.stringify(this.messageForm.value));
-			
+			//this.heroService.sendMessage(this.token, JSON.stringify(this.messageForm.value));
+
+			this._http.post('http://heroapp/api/send_message?token=' + this.token, {params: JSON.stringify(this.messageForm.value)})
+				.subscribe((res:Response)=>{
+					data = JSON.stringify(res);
+					result = JSON.parse(data);
+					this.success = result.success;
+					this.showMessage = true;
+				});
+
 		} else {
 
 			console.log('Invalid message form');
