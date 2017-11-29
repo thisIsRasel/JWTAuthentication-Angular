@@ -1,5 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class HeroService {
@@ -13,10 +14,15 @@ export class HeroService {
 
 	sendMessage(token, messageData) {
 
-		this._http.post('http://heroapp/api/send_message?token='+token, {params: messageData})
-			.subscribe(data => {
+		let data : any;
 
-				console.log(data);
-			});
+		return this._http.post('http://heroapp/api/send_message?token=' + token, {params: messageData}).subscribe(response=>{
+			console.log(response);
+		});
+	}
+
+	getMessages(token, heroName) {
+
+		return this._http.get('http://heroapp/api/messages/' + heroName + '?token=' + token);
 	}
 }

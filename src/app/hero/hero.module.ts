@@ -9,12 +9,13 @@ import { HeroListComponent } from './hero-list.component';
 import { SendMessageComponent } from './send-message.component';
 import { SignupComponent } from './signup.component';
 import { HeroLoginComponent } from './hero-login.component';
+import { HeroInboxComponent } from './hero-inbox.component';
 
 import { AuthService } from '../service/auth.service';
 import { HeroService } from '../service/hero.service';
 
 @NgModule({
-	declarations: [ HeroListComponent, SignupComponent, HeroLoginComponent, SendMessageComponent ],
+	declarations: [ HeroListComponent, SignupComponent, HeroLoginComponent, SendMessageComponent, HeroInboxComponent ],
 	imports: [ CommonModule, FormsModule, ReactiveFormsModule, SharedModule ],
 	exports: [],
 	providers: [ AuthService, HeroService ]

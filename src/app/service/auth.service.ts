@@ -46,11 +46,7 @@ export class AuthService {
 		this._http.get('http://heroapp/api/authenticate-hero?token=' + token)
 			.map((response2: Response) => {
 
-				console.log('here');
 				let data = response2.json();
-
-				console.log(data);
-
 				sessionStorage.setItem('_current_user', JSON.stringify(data.user));
 			});
 	}

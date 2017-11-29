@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
+import { Router } from '@angular/router';
+
 import { HeroService } from '../service/hero.service';
 
 @Component({
@@ -8,7 +10,12 @@ import { HeroService } from '../service/hero.service';
 	template: `
 	<div class="row">
 	    <div class="col-md-4 offset-md-4">
+
 	        <div class="panel panel-default" style="margin-top:25%;">
+	        	<div class="panel-header">
+	        		<h3>Superhero Messages</h3>
+	        	</div>
+
 	            <div class="panel-body">
 	                <form class="form-horizontal" novalidate (ngSubmit)="send()" [formGroup]="messageForm">
 
@@ -32,12 +39,17 @@ import { HeroService } from '../service/hero.service';
 	                        <!-- Change this to a button or input when using this as a form -->
 	                        <div>
 	                        	<input type="submit" class="btn btn-primary" value="Send">
-	                        	<input type="button" class="btn btn-danger" value="Back">
+	                        	<input type="button" class="btn btn-danger" value="Back" (click)="back()">
 	                        </div>	
 	                    </fieldset>
 	                </form>
 	            </div>
 	        </div>
+
+	        <div *ngIf="showMessage">
+	    		<p *ngIf="success">Successfully sent!</p>
+	    		<p *ngIf="!success">Error sending message</p>
+	    	</div>
 	    </div>
 	</div>
 	`
@@ -48,8 +60,10 @@ export class SendMessageComponent implements OnInit{
 	results: any;
 	messageForm: FormGroup;
 	token: any;
+	success: boolean;
+	showMessage: boolean = false;;
 
-	constructor(private heroService: HeroService) { }
+	constructor(private heroService: HeroService, private router: Router) { }
 
 	ngOnInit() {
 
@@ -71,15 +85,21 @@ export class SendMessageComponent implements OnInit{
 
 	send() {
 
-		console.log(this.messageForm.get('to'));
+		let data: any;
+		this.showMessage = true;
 
 		if(!this.messageForm.invalid) {
 
-			this.heroService.sendMessage(this.token, JSON.stringify(this.messageForm.value));	
-					
+			this.heroService.sendMessage(this.token, JSON.stringify(this.messageForm.value));
+			
 		} else {
 
 			console.log('Invalid message form');
 		}
+	}
+
+	back() {
+
+		this.router.navigate(['hero-list']);
 	}
 }
